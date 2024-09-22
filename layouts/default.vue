@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
@@ -8,9 +7,9 @@
       <v-app-bar-title>Some title</v-app-bar-title>
     </v-app-bar>
 
-    <slot/>
-
-    <v-footer>Some footer</v-footer>
+    <v-main>
+      <slot/>
+    </v-main>
   </v-app>
 </template>
 
