@@ -10,7 +10,7 @@ defineProps({
   },
   author: {
     default: '',
-    type: String
+    type: [String, Boolean]
   },
   published_at: {
     required: true,
@@ -31,7 +31,7 @@ defineProps({
   <v-card class="mt-5" :elevation="2">
     <template v-slot:title>
       <v-card-title><a :href="origin">{{ title }}</a></v-card-title>
-      <v-card-subtitle><span class="text-blue-darken-2">{{ author }}</span> {{ published_at }}</v-card-subtitle>
+      <v-card-subtitle><span v-if="author" class="text-blue-darken-2">{{ author }}</span> {{ published_at }}</v-card-subtitle>
     </template>
 
     <v-carousel
