@@ -48,6 +48,7 @@ export default defineEventHandler(e => {
           }
         }
 
+        data.images = images
         return data
       })
     }
