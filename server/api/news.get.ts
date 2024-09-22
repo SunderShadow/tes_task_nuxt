@@ -3,7 +3,7 @@ import {xml2js} from "xml-js"
 
 export type News = {
   title: string,
-  pub_date: string
+  published_at: string
   anons: string
   author: string
   origin: string,
@@ -31,7 +31,7 @@ export default defineEventHandler(e => {
       data: items.slice(ITEMS_PER_PAGE * (page - 1), ITEMS_PER_PAGE * page).map(item => {
         const data: News = {
           title: item.title._cdata,
-          pub_date: item.pubDate._text,
+          published_at: item.pubDate._text,
           anons: item['rbc_news:anons']._cdata,
           author: item?.author?._text ?? false,
           origin: item.link._text

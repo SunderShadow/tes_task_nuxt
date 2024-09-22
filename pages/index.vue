@@ -2,6 +2,7 @@
 import type {News, NewsResponse} from "~/server/api/news.get"
 
 import type {Ref} from "vue";
+import NewsCard from "~/components/NewsCard.vue";
 
 const lastPage = ref(0)
 const news: Ref<News[]> = ref([])
@@ -24,7 +25,7 @@ async function load() {
   lastPage.value = last_page
   isLoading.value = false
 
-  console.log(data)
+  window.scroll(0, 0)
 }
 
 onBeforeMount(load)
@@ -33,26 +34,8 @@ onBeforeMount(load)
 <template>
   <NuxtLayout>
     <v-container>
-      <v-card class="mt-5" v-for="item in news" :elevation="2">
-        <template v-slot:title>
-          <v-card-title><a :href="item.origin">{{ item.title }}</a></v-card-title>
-          <v-card-subtitle><span class="text-blue-darken-2">{{ item.author ? item.author : '' }}</span> {{ item.pub_date }}</v-card-subtitle>
-        </template>
-
-        <v-carousel
-            v-if="item.images"
-            :show-arrows="item.images.length > 1 ? 'hover' : false"
-            :hide-delimiters="true"
-            cycle
-        >
-          <v-carousel-item v-for="imgSrc in item.images" :src="imgSrc" cover></v-carousel-item>
-        </v-carousel>
-
-        <v-card-text class="bg-surface-light pt-4">
-          {{ item.anons }}
-        </v-card-text>
-      </v-card>
-      <v-pagination class="mt-5" :length="lastPage" :total-visible="4" v-model="currentPage" :disabled="isLoading"/>
+      <NewsCard v-for="card in news" v-bind="card"/>
+      <v-pagination class="mt-5" :length="lastPage" v-model="currentPage" :disabled="isLoading"/>
     </v-container>
   </NuxtLayout>
 </template>
